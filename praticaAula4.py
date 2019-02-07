@@ -26,17 +26,16 @@ def multiplicar(val1, val2):
 def dividir(val1, val2):
     return(val1/val2)
 
-#FUNÇÕES
-def CriarElementos(tamanhoDaEstrutura, estrutura):
+#FUNÇÕES DE BANCO DE DADOS
+def CriarElementos(tamanhoDaEstrutura, estrutura):  #OK
     if (opc == 1):      #LISTA
         for x in range(0,tamanhoDaEstrutura):
             item = input('Digite o '+str(x)+'º valor da Lista: ')
             estrutura.append(item)
-        return estrutura
     elif (opc == 2):    #MAP
         for x in range(0,tamanhoDaEstrutura):
-            item = ('Digite o '+str(x)+'º valor do Map: ')
-            index = ('Digite o '+str(x)+'º index do Map: ')
+            item = input('Digite o '+str(x)+'º valor do Map: ')
+            index = input('Digite o '+str(x)+'º index do Map: ')
             estrutura[index] = item
     elif (opc == 3):    #TUPLA/MATRIZ
         listaDaTupla = []
@@ -44,14 +43,14 @@ def CriarElementos(tamanhoDaEstrutura, estrutura):
             item = input('Digite o '+str(x)+'º valor da Tupla/Matrix: ')
             listaDaTupla.append(item)
         estrutura = tuple((listaDaTupla))
-        return estrutura
     else:               #OPÇÃO INVALIDA
         print('Estrutura não definida!')
+    return estrutura
 opc = 0
 
-def InserirElementos(InsElem):
+def InserirElementos(InsElem):                      #OK
     while (InsElem):
-        item = input('Digite o item a ser inserido na Lista: ')
+        item = input('Digite o item a ser inserido na Estrutura: ')
         if (opc == 1):  #INSERIR ITEM NA LISTA
             ondeInserir = input('Onde deseja inserir um item na sua lista?\n[1] - Fim\n[2] - Inicio\n[3] - Trocar por um item especifico\n[4] - Sair')
             if (ondeInserir == 1):  #INSERIR ELEMENTO NO FIM
@@ -74,8 +73,7 @@ def InserirElementos(InsElem):
             else:                   #OPÇÃO INVALIDA
                 print('Opção Invalida!')   
         elif(opc == 2): #INSERIR ITEM NO MAP
-            item = ('Digite o valor do Map: ')
-            index = ('Digite o index do Map: ')
+            index = input('Digite o index do Map: ')
             ondeInserir = int(input('Onde deseja inserir um item no seu Map?\n[1] - Qualquer lugar\n[2] - Trocar por um item especifico referente ao index\n[3] - Sair\n'))
             if (ondeInserir == 1):  #INSERIR ELEMENTO NO MAP
                 estrutura[index] = item
@@ -94,7 +92,7 @@ def InserirElementos(InsElem):
             else:                   #OPÇÃO INVALIDA
                 print('Opção Invalida!')
 
-def RemoverElementos(RemElem):
+def RemoverElementos(RemElem):                      #OK
     if (opc == 1):      #REMOVER ITEM DE LISTA
         ondeRemover = input('\nDe onde deseja remover o item da lista?\n[1] - Inicio\n[2] - Fim\n[3] - Local especifico\n')
         if (ondeRemover == 1):      #REMOVER ITEM DO FIM DA LISTA
@@ -180,14 +178,18 @@ while(sair):
                 if (opc == 1):      #LISTA
                     estrutura = []
                     tamanhoDaEstrutura = int(input('Digite a quantidade de elementos da sua Lista: '))
-                    CriarElementos(tamanhoDaEstrutura, estrutura)
+                    estrutura = CriarElementos(tamanhoDaEstrutura, estrutura)
+                    print(estrutura)
                 elif (opc == 2):    #MAP
                     estrutura = {}
                     tamanhoDaEstrutura = int(input('Digite a quantidade de elementos do seu Map: '))
-                    CriarElementos(tamanhoDaEstrutura, estrutura)
+                    estrutura = CriarElementos(tamanhoDaEstrutura, estrutura)
+                    print(estrutura)
                 elif (opc == 3):    #TUPLA/MATRIZ
+                    estrutura = 0
                     tamanhoDaEstrutura = int(input('Digite a quantidade de elementos da sua Tupla/Matriz: '))
-                    CriarElementos(tamanhoDaEstrutura, estrutura)
+                    estrutura = CriarElementos(tamanhoDaEstrutura, estrutura)
+                    print(estrutura)
                 else:               #OPÇÃO INVALIDA
                     print('Opção Invalida!')
             elif (bancoDeDados == 2):   #INSERIR ELEMENTOS
@@ -207,10 +209,16 @@ while(sair):
                 else:
                     print('Estrutura não criada')           
             elif (bancoDeDados == 4):   #PROCURAR ELEMENTOS
-                local = input('Digite o index/local do elemento')
-                print(estrutura[local])
+                if(opc==1 or opc==2 or opc==3):
+                    local = input('Digite o index/local do elemento: ')
+                    print(estrutura[local])
+                else:
+                    print('Estrutura não criada!')
             elif (bancoDeDados == 5):   #MOSTRAR TODOS OS ELEMENTOS
-                print(estrutura)           
+                if(opc==1 or opc==2 or opc==3):
+                    print(estrutura) 
+                else:
+                    print('Estrutura não criada!')          
             elif (bancoDeDados == 6):   #SAIR
                 bDD = False
             else:
